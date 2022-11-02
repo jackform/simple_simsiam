@@ -7,7 +7,8 @@ class FoodDataset(Dataset):
 
     def __init__(self, train=True, tfm=None, needDoubleTransformImage=True, needLabel=True):
         super(FoodDataset).__init__()
-        _dataset_dir = "../input/ml2022spring-hw3b/food11"
+        _dataset_dir = "/kaggle/input/ml2022spring-hw3b/food11"
+    
 
         if needLabel and needDoubleTransformImage:
             path = os.path.join(_dataset_dir, "test")
@@ -25,8 +26,8 @@ class FoodDataset(Dataset):
         # self.classes = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k']
         self.train = train
         # self.targets = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] for i in range(self.size)]
-        self.targets = [i for i in range(11)]
         self.needDoubleTransformImage = needDoubleTransformImage
+        self.targets = [int(fname.split("/")[-1].split("_")[0]) for fname in self.files]
 
     def __len__(self):
         return len(self.files)
