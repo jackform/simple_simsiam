@@ -40,7 +40,7 @@ def main(args):
 
 
     model = get_backbone(args.model.backbone)
-    classifier = nn.Linear(in_features=model.output_dim, out_features=10, bias=True).to(args.device)
+    classifier = nn.Linear(in_features=model.output_dim, out_features=11, bias=True).to(args.device)
 
     assert args.eval_from is not None
     save_dict = torch.load(args.eval_from, map_location='cpu')

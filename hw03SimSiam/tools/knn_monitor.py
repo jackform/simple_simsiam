@@ -34,10 +34,10 @@ def knn_monitor(net, memory_data_loader, test_data_loader, device, k=200, t=0.1,
             pred_labels = knn_predict(feature, feature_bank, feature_labels, classes, k, t)
 
             total_num += data.size(0)
-            print("pred_labels", pred_labels.size())
-            print("pred_labels predict:", pred_labels[:, 0].size())
-            print("target", target.size())
-            print("target predict", target.squeeze().size())
+            #print("pred_labels", pred_labels.size())
+            #print("pred_labels predict:", pred_labels[:, 0].size())
+            #print("target", target.size())
+            #print("target predict", target.squeeze().size())
             total_top1 += (pred_labels[:, 0] == target).float().sum().item()
             # total_top1 += (pred_labels == target).float().sum().item()
             test_bar.set_postfix({'Accuracy': total_top1 / total_num * 100})
@@ -48,12 +48,12 @@ def knn_monitor(net, memory_data_loader, test_data_loader, device, k=200, t=0.1,
 # implementation follows http://github.com/zhirongw/lemniscate.pytorch and https://github.com/leftthomas/SimCLR
 def knn_predict(feature, feature_bank, feature_labels, classes, knn_k, knn_t):
     # compute cos similarity between each feature vector and feature bank ---> [B, N]
-    print('feature:', feature.size(), "feature_bank:", feature_bank.size())
+    #print('feature:', feature.size(), "feature_bank:", feature_bank.size())
     sim_matrix = torch.mm(feature, feature_bank)
-    print('sim_matrix size:', sim_matrix.size())
+    #print('sim_matrix size:', sim_matrix.size())
     # [B, K]
     sim_weight, sim_indices = sim_matrix.topk(k=knn_k, dim=-1)
-    print('sim_weight', sim_weight.size(), 'sim_indices:', sim_indices)
+    #print('sim_weight', sim_weight.size(), 'sim_indices:', sim_indices)
     # [B, K]
     sim_labels = torch.gather(feature_labels.expand(feature.size(0), -1), dim=-1, index=sim_indices)
     sim_weight = (sim_weight / knn_t).exp()
