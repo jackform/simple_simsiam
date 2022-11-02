@@ -22,7 +22,7 @@ class FoodDataset(Dataset):
         print(f"One sample", self.files[0])
         self.transform = tfm
         self.size = len(self.files)
-        self.classes = [str(i + 1) for i in range(11)]
+        self.classes = [str(i) for i in range(11)]
         # self.classes = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k']
         self.train = train
         # self.targets = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] for i in range(self.size)]

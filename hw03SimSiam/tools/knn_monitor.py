@@ -13,6 +13,7 @@ def knn_monitor(net, memory_data_loader, test_data_loader, epoch, k=200, t=0.1, 
         # generate feature bank
         for data, target in tqdm(memory_data_loader, desc='Feature extracting', leave=False, disable=hide_progress):
             # feature = net(data.cuda(non_blocking=True))
+            data = data.to(device, non_blocking=True)
             print('shape of data', data.size())
             feature = net(data)
             feature = F.normalize(feature, dim=1)
@@ -26,6 +27,7 @@ def knn_monitor(net, memory_data_loader, test_data_loader, epoch, k=200, t=0.1, 
         for data, target in test_bar:
             # data, target = data.cuda(non_blocking=True), target.cuda(non_blocking=True)
             # data, target = data(non_blocking=True), target.cuda(non_blocking=True)
+            data, target = data.to(device, non_blocking=True), target.to(device, non_blocking=True)
             feature = net(data)
             feature = F.normalize(feature, dim=1)
 
