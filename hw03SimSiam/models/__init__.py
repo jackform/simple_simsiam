@@ -3,7 +3,7 @@ from .byol import BYOL
 from .simclr import SimCLR
 from torchvision.models import resnet50, resnet18
 import torch
-from .backbones import resnet18_cifar_variant1, resnet18_cifar_variant2
+from .backbones import resnet18_cifar_variant1, resnet18_cifar_variant2, resnet_food_pretrain
 
 def get_backbone(backbone, castrate=True):
     backbone = eval(f"{backbone}()")
