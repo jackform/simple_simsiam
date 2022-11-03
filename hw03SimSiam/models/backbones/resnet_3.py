@@ -88,7 +88,8 @@ class Classifier(nn.Module):
 
 def resNetFood():
     model = Classifier()
-    model_path = "./sample_3_best.ckpt"
+    #model_path = "./sample_3_best.ckpt"
+    model_path = "/kaggle/input/fork-of-ml2022hw3-pretrain-model/sample_3_best.ckpt"
     if os.path.exists(model_path):
         model.load_state_dict(torch.load(model_path, map_location=torch.device('cpu')))
     else:
