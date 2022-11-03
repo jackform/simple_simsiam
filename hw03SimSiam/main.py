@@ -99,7 +99,7 @@ def main(device, args):
 
     # Save checkpoint
     model_path = os.path.join(args.ckpt_dir,
-                              f"{args.name}_{datetime.now().strftime('%m%d%H%M%S')}.pth")  # datetime.now().strftime('%Y%m%d_%H%M%S')
+                              f"{args.name}.pth")  # datetime.now().strftime('%Y%m%d_%H%M%S')
     torch.save({
         'epoch': epoch + 1,
         'state_dict': model.module.state_dict()
