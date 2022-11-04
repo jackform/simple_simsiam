@@ -13,9 +13,10 @@ from datasets import get_dataset
 from optimizers import get_optimizer, LR_Scheduler
 from linear_eval import main as linear_eval
 from datetime import datetime
-
+import torch.multiprocessing
 
 def main(device, args):
+    torch.multiprocessing.set_sharing_strategy('file_system')
     train_loader = torch.utils.data.DataLoader(
         dataset=get_dataset(
             transform=get_aug(train=True, **args.aug_kwargs),
