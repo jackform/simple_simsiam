@@ -9,16 +9,21 @@ class FoodDataset(Dataset):
         super(FoodDataset).__init__()
         _dataset_dir = "/kaggle/input/ml2022spring-hw3b/food11"
     
-
-        if needLabel and needDoubleTransformImage:
+        if not needLabel and needDoubleTransformImage:
             path = os.path.join(_dataset_dir, "test")
+            test_file = sorted([os.path.join(path, x) for x in os.listdir(path) if x.endswith(".jpg")])
+            path = os.path.join(_dataset_dir, "training")
+            train_file = sorted([os.path.join(path, x) for x in os.listdir(path) if x.endswith(".jpg")])
+            path = os.path.join(_dataset_dir, "validation")
+            validate_file = sorted([os.path.join(path, x) for x in os.listdir(path) if x.endswith(".jpg")])
+            self.files = test_file + train_file + validate_file
         else:
             if train:
                 path = os.path.join(_dataset_dir, "training")
             else:
                 path = os.path.join(_dataset_dir, "validation")
+            self.files = sorted([os.path.join(path, x) for x in os.listdir(path) if x.endswith(".jpg")])
 
-        self.files = sorted([os.path.join(path, x) for x in os.listdir(path) if x.endswith(".jpg")])
         print(f"One sample", self.files[0])
         self.transform = tfm
         self.size = len(self.files)
