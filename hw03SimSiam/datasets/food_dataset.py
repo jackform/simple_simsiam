@@ -32,7 +32,11 @@ class FoodDataset(Dataset):
         self.train = train
         # self.targets = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] for i in range(self.size)]
         self.needDoubleTransformImage = needDoubleTransformImage
-        self.targets = [int(fname.split("/")[-1].split("_")[0]) for fname in self.files]
+        if needLabel:
+            self.targets = [int(fname.split("/")[-1].split("_")[0]) for fname in self.files]
+        else:
+            self.targets = [-1 for fname in self.files]
+
 
     def __len__(self):
         return len(self.files)
